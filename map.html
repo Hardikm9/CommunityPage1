@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#059669">
+  <title>Interactive Map - Community Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global-enhancements.css">
+  <script src="theme-system.js"></script>
+  <script src="notification-system.js"></script>
+  <script src="map-system.js"></script>
+  
+  <style>
+    /* Map Page Specific Styles */
+    :root {
+      --primary: #22c55e;
+      --primary-light: #4ade80;
+      --primary-dark: #15803d;
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --surface: #ffffff;
+      --surface-dark: #f8fafc;
+      --surface-darker: #f1f5f9;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --text-light: #9ca3af;
+      --border: #e5e7eb;
+      --border-light: #f3f4f6;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header Section */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .back {
+      background: var(--surface-dark);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Main Content */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .map-container {
+      flex: 1;
+      position: relative;
+      min-height: calc(100vh - 80px);
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+
+    /* Map Info Panel */
+    .map-info {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      max-width: 300px;
+      z-index: 1000;
+    }
+
+    .map-info h3 {
+      margin: 0 0 1rem 0;
+      color: var(--text-primary);
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .map-info p {
+      margin: 0 0 1rem 0;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .map-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0.75rem;
+      background: var(--surface-dark);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      display: flex;
+      gap: 0.75rem;
+      z-index: 1000;
+    }
+
+    .quick-action-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-md);
+      text-decoration: none;
+    }
+
+    .quick-action-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Loading State */
+    .map-loading {
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border-light);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header-inner {
+        padding: 0.75rem 1rem;
+      }
+
+      .map-info {
+        position: static;
+        margin: 1rem;
+        max-width: none;
+      }
+
+      .map-container {
+        min-height: calc(100vh - 200px);
+      }
+
+      .quick-actions {
+        position: static;
+        margin: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .map-stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+      }
+
+      .stat-item {
+        padding: 0.5rem;
+      }
+
+      .stat-number {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quick-actions {
+        flex-direction: column;
+      }
+
+      .quick-action-btn {
+        justify-content: center;
+      }
+
+      .map-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Hide info panel on small screens when map is interactive */
+    @media (max-width: 768px) {
+      .map-info.hide-mobile {
+        display: none;
+      }
+      
+      .map-container.fullscreen .map-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <header>
+      <div class="header-inner">
+        <div>
+          <h1>🗺️ Interactive Community Map</h1>
+          <p class="subtitle">View all reported issues on an interactive map with filters and clustering</p>
+        </div>
+        <a href="Index.html" class="back">⬅ Back to Main</a>
+      </div>
+    </header>
+
+    <div class="map-container">
+      <!-- Loading State -->
+      <div class="map-loading" id="mapLoading">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading interactive map...</p>
+      </div>
+
+      <!-- Map Info Panel -->
+      <div class="map-info" id="mapInfo">
+        <h3>🗺️ Community Issues Map</h3>
+        <p>Click on markers to view issue details. Use the layer controls to filter by category. Click anywhere on the map to quickly report a new issue.</p>
+        
+        <div class="map-stats" id="mapStats">
+          <div class="stat-item">
+            <div class="stat-number" id="totalIssues">0</div>
+            <div class="stat-label">Total Issues</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="pendingIssues">0</div>
+            <div class="stat-label">Pending</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="resolvedIssues">0</div>
+            <div class="stat-label">Resolved</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="highPriority">0</div>
+            <div class="stat-label">High Priority</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Container -->
+      <div id="map"></div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <a href="request.html" class="quick-action-btn">
+          📸 Report New Issue
+        </a>
+        <a href="listed.html" class="quick-action-btn">
+          📋 View All Issues
+        </a>
+        <button class="quick-action-btn" onclick="toggleMapInfo()">
+          ℹ️ Toggle Info
+        </button>
+        <button class="quick-action-btn" onclick="refreshMapData()">
+          🔄 Refresh Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Map page specific functionality
+    let mapInfoVisible = true;
+
+    // Update statistics
+    function updateMapStats() {
+      try {
+        const problems = JSON.parse(localStorage.getItem('problems')) || [];
+        
+        document.getElementById('totalIssues').textContent = problems.length;
+        document.getElementById('pendingIssues').textContent = problems.filter(p => p.status !== 'Resolved').length;
+        document.getElementById('resolvedIssues').textContent = problems.filter(p => p.status === 'Resolved').length;
+        document.getElementById('highPriority').textContent = problems.filter(p => p.priority === 'high').length;
+      } catch (error) {
+        console.error('Failed to update map stats:', error);
+      }
+    }
+
+    // Toggle map info panel
+    function toggleMapInfo() {
+      const mapInfo = document.getElementById('mapInfo');
+      mapInfoVisible = !mapInfoVisible;
+      
+      if (mapInfoVisible) {
+        mapInfo.style.display = 'block';
+        mapInfo.classList.remove('hide-mobile');
+      } else {
+        mapInfo.style.display = 'none';
+        mapInfo.classList.add('hide-mobile');
+      }
+    }
+
+    // Refresh map data
+    function refreshMapData() {
+      if (window.mapSystem) {
+        window.mapSystem.refresh();
+        updateMapStats();
+        
+        if (window.notifications) {
+          window.notifications.success('Map data refreshed!');
+        }
+      }
+    }
+
+    // Initialize map when DOM is ready
+    document.addEventListener('DOMContentLoaded', async () => {
+      updateMapStats();
+      
+      // Check if we have location data to show
+      const problems = JSON.parse(localStorage.getItem('problems')) || [];
+      const problemsWithLocation = problems.filter(p => p.location && p.location.latitude && p.location.longitude);
+      
+      if (problemsWithLocation.length === 0) {
+        document.getElementById('mapLoading').innerHTML = `
+          <div class="loading-spinner"></div>
+          <p class="loading-text">No issues with location data found.</p>
+          <p style="color: var(--text-light); font-size: 0.875rem; margin-top: 0.5rem;">
+            Report issues with location to see them on the map.
+          </p>
+        `;
+      }
+
+      // Initialize map system
+      if (window.mapSystem) {
+        try {
+          await window.mapSystem.init('map');
+          
+          // Hide loading state
+          document.getElementById('mapLoading').style.display = 'none';
+          
+          // Auto-hide info panel on mobile after map loads
+          if (window.innerWidth <= 768) {
+            setTimeout(() => {
+              toggleMapInfo();
+            }, 3000);
+          }
+        } catch (error) {
+          console.error('Failed to initialize map:', error);
+          document.getElementById('mapLoading').innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+              <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 1rem;">❌ Failed to Load Map</p>
+              <p style="color: var(--text-secondary); margin-bottom: 1rem;">The interactive map could not be loaded. This might be due to:</p>
+              <ul style="color: var(--text-secondary); text-align: left; max-width: 300px; margin: 0 auto 1rem;">
+                <li>Network connection issues</li>
+                <li>Browser compatibility</li>
+                <li>JavaScript disabled</li>
+              </ul>
+              <button onclick="location.reload()" style="background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer;">
+                🔄 Try Again
+              </button>
+            </div>
+          `;
+        }
+      }
+    });
+
+    // Listen for storage changes to update stats
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'problems') {
+        updateMapStats();
+        if (window.mapSystem) {
+          window.mapSystem.refresh();
+        }
+      }
+    });
+
+    // Handle URL parameters for centering on specific issues
+    const urlParams = new URLSearchParams(window.location.search);
+    const problemId = urlParams.get('problem');
+    if (problemId && window.mapSystem) {
+      // Wait for map to initialize then center on problem
+      setTimeout(() => {
+        window.mapSystem.centerOnProblem(problemId);
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

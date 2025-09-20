@@ -1,0 +1,58 @@
+/* Header Visibility Fix */
+header {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: white !important;
+  width: 100% !important;
+  min-height: 120px !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+header .container {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 2.5rem 1.5rem !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  position: relative !important;
+}
+
+header h1 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: clamp(2.25rem, 5vw, 3.25rem) !important;
+  font-weight: 700 !important;
+  color: #1f2937 !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+  line-height: 1.1 !important;
+}
+
+header p {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 1.25rem !important;
+  color: #6b7280 !important;
+  text-align: center !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+
+.menu-btn {
+  position: absolute !important;
+  top: 2rem !important;
+  right: 1.5rem !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 200 !important;
+}

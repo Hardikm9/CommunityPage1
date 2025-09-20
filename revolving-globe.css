@@ -1,0 +1,49 @@
+/* Revolving Globe Styles */
+.revolving-globe-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  z-index: 0; /* Behind other content */
+  pointer-events: none; /* Allows clicks to pass through */
+  opacity: 0.6; /* Subtle background presence */
+}
+
+/* Make it more subtle on smaller screens */
+@media (max-width: 768px) {
+  .revolving-globe-container {
+    width: 300px;
+    height: 300px;
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .revolving-globe-container {
+    width: 250px;
+    height: 250px;
+    opacity: 0.3;
+  }
+}
+
+/* Add a subtle glow effect */
+.revolving-globe-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Ensure the canvas fills the container */
+.revolving-globe-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

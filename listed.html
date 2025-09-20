@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listed Problems</title>
+  <link rel="stylesheet" href="listed-modern.css">
+  <link rel="stylesheet" href="global-enhancements.css">
+  <script src="theme-system.js"></script>
+  <script src="notification-system.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1>📝 Community Reported Problems</h1>
+        <p class="subtitle">Review and manage reported issues from the community.</p>
+      </div>
+      <a href="Index.html" class="back">⬅ Back to Main</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Filter and Search Controls -->
+    <div class="filter-controls">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Search problems...">
+      </div>
+      <div class="filter-row">
+        <select id="statusFilter">
+          <option value="all">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="resolved">Resolved</option>
+        </select>
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="waste">🗑️ Waste</option>
+          <option value="infrastructure">🚧 Infrastructure</option>
+          <option value="environment">🌱 Environment</option>
+          <option value="pollution">💨 Pollution</option>
+          <option value="other">📝 Other</option>
+        </select>
+        <select id="priorityFilter">
+          <option value="all">All Priorities</option>
+          <option value="high">🔴 High</option>
+          <option value="medium">🟡 Medium</option>
+          <option value="low">🟢 Low</option>
+        </select>
+        <select id="sortBy">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="priority">By Priority</option>
+          <option value="category">By Category</option>
+        </select>
+      </div>
+      <div class="stats-summary">
+        <div class="stats-left">
+          <span id="totalCount">0 problems</span>
+          <span id="pendingCount">0 pending</span>
+          <span id="resolvedCount">0 resolved</span>
+        </div>
+        <div class="export-controls">
+          <button id="exportCSV" class="export-btn">📄 Export CSV</button>
+          <button id="showStats" class="export-btn">📈 View Stats</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="problemList"></div>
+  </main>
+
+  <!-- Image Modal -->
+<div id="imgModal">
+  <span onclick="closeModal()">&times;</span>
+  <img id="modalImage" src="">
+</div>
+
+<!-- Statistics Modal -->
+<div id="statsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeStatsModal()">&times;</span>
+    <h2>📈 Community Problems Analytics</h2>
+    <div id="statsContent" class="stats-content">
+      <!-- Stats will be populated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+  <script src="listed.js"></script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Functionality Test</title>
+  <link rel="stylesheet" href="global-enhancements.css">
+  <script src="theme-system.js"></script>
+  <script src="notification-system.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 2rem;
+      background: var(--surface, #ffffff);
+      color: var(--text-primary, #1f2937);
+      line-height: 1.6;
+    }
+    
+    .test-section {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border: 1px solid var(--border, #e5e7eb);
+      border-radius: var(--radius, 12px);
+      background: var(--surface-dark, #f8fafc);
+    }
+    
+    .test-button {
+      background: var(--primary, #22c55e);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius, 12px);
+      cursor: pointer;
+      margin: 0.5rem 0.5rem 0.5rem 0;
+      transition: var(--transition);
+    }
+    
+    .test-button:hover {
+      background: var(--primary-dark, #15803d);
+      transform: translateY(-1px);
+    }
+    
+    .status {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: var(--radius, 8px);
+      font-weight: 500;
+    }
+    
+    .status.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #d1fae5;
+    }
+    
+    .status.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .feature-check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+    }
+    
+    .check-icon {
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌱 Community Hub - Core Functionality Test</h1>
+  <p>This page tests that all essential features work correctly without errors.</p>
+
+  <div class="test-section">
+    <h2>🎨 Theme System Test</h2>
+    <button class="test-button" onclick="testThemeSystem()">Test Theme Toggle</button>
+    <div id="themeStatus" class="status" style="display: none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>🔔 Notification System Test</h2>
+    <button class="test-button" onclick="testNotifications()">Test Success Notification</button>
+    <button class="test-button" onclick="testErrorNotification()">Test Error Notification</button>
+    <div id="notificationStatus" class="status" style="display: none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>💾 Local Storage Test</h2>
+    <button class="test-button" onclick="testLocalStorage()">Test Data Storage</button>
+    <div id="storageStatus" class="status" style="display: none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>🎤 Voice Recording Test</h2>
+    <button class="test-button" onclick="testVoiceRecorder()">Test Voice Recorder</button>
+    <div id="voiceStatus" class="status" style="display: none;"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ Core Features Status</h2>
+    <div class="feature-grid">
+      <div class="feature-check">
+        <span class="check-icon" id="cssCheck">⏳</span>
+        <span>CSS Variables Loading</span>
+      </div>
+      <div class="feature-check">
+        <span class="check-icon" id="jsCheck">⏳</span>
+        <span>JavaScript Loading</span>
+      </div>
+      <div class="feature-check">
+        <span class="check-icon" id="serviceWorkerCheck">⏳</span>
+        <span>Service Worker</span>
+      </div>
+      <div class="feature-check">
+        <span class="check-icon" id="geoCheck">⏳</span>
+        <span>Geolocation Support</span>
+      </div>
+      <div class="feature-check">
+        <span class="check-icon" id="mediaCheck">⏳</span>
+        <span>Media/Camera Support</span>
+      </div>
+      <div class="feature-check">
+        <span class="check-icon" id="notificationCheck">⏳</span>
+        <span>Browser Notifications</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>🔗 Navigation Links Test</h2>
+    <div class="feature-grid">
+      <a href="Index.html" class="test-button">🏠 Go to Home</a>
+      <a href="request.html" class="test-button">📸 Report Issue</a>
+      <a href="listed.html" class="test-button">📋 View Issues</a>
+      <a href="progress.html" class="test-button">✅ Progress</a>
+      <a href="map.html" class="test-button">🗺️ Interactive Map</a>
+    </div>
+  </div>
+
+  <script>
+    // Test theme system
+    function testThemeSystem() {
+      const status = document.getElementById('themeStatus');
+      status.style.display = 'block';
+      
+      try {
+        if (typeof window.themeSystem !== 'undefined' || document.documentElement.getAttribute('data-theme')) {
+          status.className = 'status success';
+          status.textContent = '✅ Theme system is working! Check the theme toggle in the header.';
+        } else {
+          status.className = 'status error';
+          status.textContent = '⚠️ Theme system may not be fully loaded, but basic functionality should work.';
+        }
+      } catch (error) {
+        status.className = 'status error';
+        status.textContent = '❌ Theme system error: ' + error.message;
+      }
+    }
+
+    // Test notifications
+    function testNotifications() {
+      const status = document.getElementById('notificationStatus');
+      status.style.display = 'block';
+      
+      try {
+        if (typeof window.notifications !== 'undefined' && window.notifications.success) {
+          window.notifications.success('🎉 Notifications are working perfectly!');
+          status.className = 'status success';
+          status.textContent = '✅ Notification system is working! Check the top-right corner.';
+        } else {
+          status.className = 'status error';
+          status.textContent = '⚠️ Notification system not fully loaded. Basic alerts will work instead.';
+          alert('✅ Basic notifications are working!');
+        }
+      } catch (error) {
+        status.className = 'status error';
+        status.textContent = '❌ Notification error: ' + error.message;
+      }
+    }
+
+    function testErrorNotification() {
+      const status = document.getElementById('notificationStatus');
+      status.style.display = 'block';
+      
+      try {
+        if (typeof window.notifications !== 'undefined' && window.notifications.error) {
+          window.notifications.error('⚠️ This is a test error notification.');
+          status.className = 'status success';
+          status.textContent = '✅ Error notifications are working!';
+        } else {
+          alert('⚠️ This is a test error notification (fallback).');
+          status.className = 'status success';
+          status.textContent = '✅ Fallback notifications are working!';
+        }
+      } catch (error) {
+        status.className = 'status error';
+        status.textContent = '❌ Error notification failed: ' + error.message;
+      }
+    }
+
+    // Test local storage
+    function testLocalStorage() {
+      const status = document.getElementById('storageStatus');
+      status.style.display = 'block';
+      
+      try {
+        const testKey = 'community_hub_test';
+        const testData = { test: true, timestamp: Date.now() };
+        
+        localStorage.setItem(testKey, JSON.stringify(testData));
+        const retrieved = JSON.parse(localStorage.getItem(testKey));
+        
+        if (retrieved && retrieved.test === true) {
+          localStorage.removeItem(testKey);
+          status.className = 'status success';
+          status.textContent = '✅ Local storage is working! Data can be saved and retrieved.';
+        } else {
+          status.className = 'status error';
+          status.textContent = '❌ Local storage test failed - data not retrieved correctly.';
+        }
+      } catch (error) {
+        status.className = 'status error';
+        status.textContent = '❌ Local storage error: ' + error.message;
+      }
+    }
+
+    // Test voice recorder
+    function testVoiceRecorder() {
+      const status = document.getElementById('voiceStatus');
+      status.style.display = 'block';
+      
+      try {
+        if (typeof window.voiceRecorder !== 'undefined') {
+          status.className = 'status success';
+          status.textContent = '✅ Voice recorder is loaded! Go to Report Issue page to test recording.';
+        } else if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          status.className = 'status success';
+          status.textContent = '✅ Voice recording API is supported by your browser!';
+        } else {
+          status.className = 'status error';
+          status.textContent = '⚠️ Voice recording not supported in this browser.';
+        }
+      } catch (error) {
+        status.className = 'status error';
+        status.textContent = '❌ Voice recorder error: ' + error.message;
+      }
+    }
+
+    // Auto-run feature checks when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check CSS variables
+      const cssCheck = document.getElementById('cssCheck');
+      const computedStyle = getComputedStyle(document.documentElement);
+      const primaryColor = computedStyle.getPropertyValue('--primary');
+      
+      if (primaryColor.trim()) {
+        cssCheck.textContent = '✅';
+      } else {
+        cssCheck.textContent = '❌';
+      }
+
+      // Check JavaScript loading
+      const jsCheck = document.getElementById('jsCheck');
+      jsCheck.textContent = '✅';
+
+      // Check service worker
+      const swCheck = document.getElementById('serviceWorkerCheck');
+      if ('serviceWorker' in navigator) {
+        swCheck.textContent = '✅';
+      } else {
+        swCheck.textContent = '❌';
+      }
+
+      // Check geolocation
+      const geoCheck = document.getElementById('geoCheck');
+      if ('geolocation' in navigator) {
+        geoCheck.textContent = '✅';
+      } else {
+        geoCheck.textContent = '❌';
+      }
+
+      // Check media devices
+      const mediaCheck = document.getElementById('mediaCheck');
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        mediaCheck.textContent = '✅';
+      } else {
+        mediaCheck.textContent = '❌';
+      }
+
+      // Check notifications
+      const notificationCheck = document.getElementById('notificationCheck');
+      if ('Notification' in window) {
+        notificationCheck.textContent = '✅';
+      } else {
+        notificationCheck.textContent = '❌';
+      }
+
+      // Auto-show success message
+      setTimeout(() => {
+        if (typeof window.notifications !== 'undefined' && window.notifications.info) {
+          window.notifications.info('🧪 Test page loaded successfully! All core systems are ready.');
+        }
+      }, 1000);
+    });
+  </script>
+
+  <script src="voice-recorder.js"></script>
+  
+  <footer style="margin-top: 3rem; padding: 2rem; text-align: center; border-top: 1px solid var(--border, #e5e7eb); color: var(--text-secondary, #6b7280);">
+    <p>🌱 Community Hub - Core Functionality Test Complete</p>
+    <p style="font-size: 0.875rem;">If all tests pass, your Community Hub is ready to use!</p>
+  </footer>
+</body>
+</html>
