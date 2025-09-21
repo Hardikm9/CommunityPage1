@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#059669">
+  <meta name="description" content="Community-driven platform for reporting and tracking environmental issues">
+  <title>Community Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global-enhancements.css">
+  <link rel="manifest" href="manifest.json">
+  <script src="theme-system.js"></script>
+  <script src="notification-system.js"></script>
+  
+  <style>
+    /* Modern Professional Community Hub Landing Page */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    
+    :root {
+      --primary: #22c55e;
+      --primary-light: #4ade80;
+      --primary-dark: #15803d;
+      --accent: #0ea5e9;
+      --accent-light: #38bdf8;
+      --surface: #ffffff;
+      --surface-dark: #f8fafc;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --text-light: #9ca3af;
+      --border: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body.landing {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .main-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Ensure header is visible */
+    header {
+      display: block;
+      position: relative;
+      z-index: 100;
+    }
+    
+    /* Header Section */
+    header {
+      background: var(--surface) !important;
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      z-index: 100;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 100%;
+      min-height: 120px;
+    }
+    
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      min-height: 140px;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    header h1 {
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: clamp(2.25rem, 5vw, 3.25rem) !important;
+      font-weight: 700 !important;
+      color: var(--text-primary) !important;
+      margin-bottom: 1rem !important;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative;
+      z-index: 10;
+    }
+    
+    header h1 .highlight {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+    
+    header p {
+      font-size: 1.25rem !important;
+      color: var(--text-secondary) !important;
+      max-width: 600px;
+      margin: 0 auto !important;
+      font-weight: 400;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .menu-btn {
+      position: absolute !important;
+      top: 2rem !important;
+      right: 1.5rem !important;
+      background: var(--surface) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text-primary) !important;
+      padding: 0.875rem 1.5rem !important;
+      border-radius: var(--radius) !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: var(--transition) !important;
+      box-shadow: var(--shadow-md) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+      z-index: 200 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    .menu-btn:hover {
+      background: var(--surface-dark) !important;
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+      box-shadow: var(--shadow-md) !important;
+      transform: translateY(-1px) !important;
+    }
+    
+    /* Main Content */
+    .options {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      align-items: stretch;
+      justify-content: center;
+    }
+    
+    /* Card Design */
+    .card {
+      background: var(--surface) !important;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      min-height: 220px;
+      height: auto;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-8px);
+    }
+    
+    .card .icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    
+    .card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--text-primary) !important;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .card p {
+      color: var(--text-secondary) !important;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+      opacity: 0.9;
+    }
+    
+    .card.request {
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .card.listed {
+      border-left: 4px solid #8b5cf6;
+    }
+    
+    .card.progress {
+      border-left: 4px solid var(--primary);
+    }
+    
+    .card.map {
+      border-left: 4px solid #f59e0b;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-top: auto;
+      box-shadow: 0 -1px 3px 0 rgb(0 0 0 / 0.1);
+    }
+    
+    footer p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-settings {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .settings-btn {
+      background: var(--surface-dark);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .settings-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    
+    /* Navigation Overlay */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .nav-content {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      min-width: 320px;
+      max-width: 90vw;
+      box-shadow: var(--shadow-xl);
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-overlay.show .nav-content {
+      transform: scale(1) translateY(0);
+    }
+    
+    .nav-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--surface-dark);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+    
+    .nav-close:hover {
+      background: #fee2e2;
+      border-color: #fca5a5;
+      color: #dc2626;
+    }
+    
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--surface-dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .nav-links a:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateX(4px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .options {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem 3rem;
+        gap: 1.25rem;
+      }
+      
+      .card {
+        padding: 1.75rem 1.25rem;
+        min-height: 200px;
+      }
+      
+      header .container {
+        padding: 1.25rem 1rem;
+      }
+      
+      .menu-btn {
+        top: 1.25rem !important;
+        right: 1rem !important;
+        padding: 0.625rem 1rem !important;
+        font-size: 0.875rem !important;
+      }
+      
+      .nav-content {
+        margin: 0 1rem;
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+      
+      .card h2 {
+        font-size: 1.25rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+      
+      .card .icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .footer-settings {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* Focus styles for better accessibility */
+    .menu-btn:focus,
+    .settings-btn:focus,
+    .nav-links a:focus,
+    .card:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    
+    /* Card animations */
+    .card {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+    
+    /* Debug: Force header visibility */
+    body header,
+    body header .container,
+    body header h1,
+    body header p {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative !important;
+    }
+  </style>
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23667eea'/><text x='50' y='65' font-size='60' text-anchor='middle' fill='white'>🌱</text></svg>">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Community Hub">
+
+</head>
+<body class="landing">
+  <!-- Navigation overlay -->
+  <nav class="nav-overlay" id="navOverlay">
+    <div class="nav-content">
+      <a href="#" class="nav-close" id="navClose">&times;</a>
+      <ul class="nav-links">
+        <li><a href="Index.html">🏠 Home</a></li>
+        <li><a href="request.html">📸 Report Issue</a></li>
+        <li><a href="listed.html">📋 View Issues</a></li>
+        <li><a href="progress.html">✅ Progress</a></li>
+        <li><a href="map.html">🗺️ Interactive Map</a></li>
+        <li><a href="test.html">🧪 System Test</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="main-container">
+    <header>
+      <div class="container">
+        <h1>🌱 <span class="highlight">Community</span> Environment Hub</h1>
+        <p>Together we solve problems for a cleaner, greener city</p>
+        <button onclick="toggleNav()" class="menu-btn" title="Open Navigation Menu">
+          📝 Menu
+        </button>
+      </div>
+    </header>
+
+    <main class="options">
+       <a href="request.html" class="card request stagger-item hover-lift">
+        <h2>📸 Generate Request</h2>
+        <p>Upload geo-tagged image & describe the problem</p>
+      </a>
+
+      <a href="listed.html" class="card listed stagger-item hover-lift">
+        <h2>📋 Listed Problems</h2>
+        <p>View submitted problems & their progress</p>
+      </a>
+
+      <a href="progress.html" class="card progress stagger-item hover-lift">
+        <h2>✅ Progress Made</h2>
+        <p>Check resolved issues with completion updates</p>
+      </a>
+
+      <a href="map.html" class="card map stagger-item hover-lift">
+        <h2>🗺️ Interactive Map</h2>
+        <p>View all issues on an interactive map with filters</p>
+      </a>
+    </main>
+  
+    <footer>
+      <p>💡 Built for our community</p>
+      <div class="footer-settings">
+        <button id="notificationSettings" class="settings-btn">
+          🔔 Notification Settings
+        </button>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- PWA Installation prompt -->
+  <div id="installPrompt" class="install-prompt" style="display: none;">
+    <div class="install-content">
+      <div class="install-header">
+        <div class="install-icon">🌱</div>
+        <div class="install-text">
+          <h3>Install Community Hub</h3>
+          <p>Add this app to your home screen for quick access and offline functionality!</p>
+        </div>
+      </div>
+      <div class="install-actions">
+        <button id="installBtn" class="install-btn-yes">Install App</button>
+        <button id="dismissBtn" class="install-btn-no">Not now</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          const registration = await navigator.serviceWorker.register('sw.js');
+          console.log('🌱 Service Worker registered successfully:', registration.scope);
+          
+          // Check for updates
+          registration.addEventListener('updatefound', () => {
+            console.log('🔄 New service worker version found');
+            const newWorker = registration.installing;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // New content is available
+                if (confirm('🆕 New version available! Refresh to update?')) {
+                  window.location.reload();
+                }
+              }
+            });
+          });
+        } catch (error) {
+          console.error('❌ Service Worker registration failed:', error);
+        }
+      });
+    }
+    
+    // PWA Install Prompt
+    let deferredPrompt;
+    const installPrompt = document.getElementById('installPrompt');
+    const installBtn = document.getElementById('installBtn');
+    const dismissBtn = document.getElementById('dismissBtn');
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show custom install prompt after a delay
+      setTimeout(() => {
+        installPrompt.style.display = 'block';
+        installPrompt.style.animation = 'slideUp 0.3s ease';
+      }, 3000);
+    });
+    
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('PWA install outcome:', outcome);
+        deferredPrompt = null;
+      }
+      installPrompt.style.display = 'none';
+    });
+    
+    dismissBtn.addEventListener('click', () => {
+      installPrompt.style.display = 'none';
+      deferredPrompt = null;
+      // Remember user's choice
+      localStorage.setItem('installPromptDismissed', Date.now());
+    });
+    
+    // Check if user previously dismissed
+    const dismissed = localStorage.getItem('installPromptDismissed');
+    if (dismissed && (Date.now() - dismissed) < 86400000 * 7) { // 7 days
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+      });
+    }
+    
+    // Notification permission request (only once per week)
+    if ('Notification' in window && Notification.permission === 'default') {
+      const notificationPromptShown = localStorage.getItem('notificationPromptShown');
+      const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000); // 7 days in milliseconds
+      
+      if (!notificationPromptShown || parseInt(notificationPromptShown) < oneWeekAgo) {
+        setTimeout(() => {
+          const userWantsNotifications = confirm(
+            '🔔 Would you like to receive notifications when you submit community issues?\n\n' +
+            'You can change this later by clicking "Not now" to disable notifications completely.'
+          );
+          
+          if (userWantsNotifications) {
+            Notification.requestPermission();
+          } else {
+            // User declined, don't ask again for a week
+            localStorage.setItem('notificationsDisabled', 'true');
+          }
+          
+          // Remember that we've shown the prompt
+          localStorage.setItem('notificationPromptShown', Date.now());
+        }, 8000); // Increased delay to 8 seconds
+      }
+    }
+    
+    // Notification settings button
+    document.getElementById('notificationSettings')?.addEventListener('click', () => {
+      const currentStatus = Notification.permission;
+      const isDisabled = localStorage.getItem('notificationsDisabled') === 'true';
+      
+      let message = `Current notification status: ${currentStatus}\n`;
+      if (isDisabled) {
+        message += 'Notifications are currently disabled by your choice.\n\n';
+      }
+      message += 'What would you like to do?\n\n';
+      message += '1. Click OK to enable/request notifications\n';
+      message += '2. Click Cancel to disable notifications';
+      
+      if (confirm(message)) {
+        // User wants to enable notifications
+        localStorage.removeItem('notificationsDisabled');
+        if (currentStatus === 'default') {
+          Notification.requestPermission();
+        }
+        alert('🔔 Notifications enabled! You\'ll receive notifications when submitting issues.');
+      } else {
+        // User wants to disable notifications
+        localStorage.setItem('notificationsDisabled', 'true');
+        alert('🔕 Notifications disabled. You won\'t receive any notification prompts.');
+      }
+    });
+    
+    // Navigation overlay functionality
+    const navOverlay = document.getElementById('navOverlay');
+    const navClose = document.getElementById('navClose');
+    
+    // Add menu button functionality (if you add a menu button later)
+    function toggleNav() {
+      navOverlay.classList.toggle('show');
+    }
+    
+    // Close navigation
+    if (navClose) {
+      navClose.addEventListener('click', () => {
+        navOverlay.classList.remove('show');
+      });
+    }
+    
+    // Close nav when clicking outside
+    navOverlay.addEventListener('click', (e) => {
+      if (e.target === navOverlay) {
+        navOverlay.classList.remove('show');
+      }
+    });
+    
+    // Add keyboard support for navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navOverlay.classList.contains('show')) {
+        navOverlay.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
